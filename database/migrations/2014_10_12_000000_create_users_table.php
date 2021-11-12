@@ -25,7 +25,7 @@ class CreateUsersTable extends Migration
             $table->string('phone')->nullable();
             $table->string('gender')->nullable();
             $table->string('dob')->nullable();
-            $table->string('image')->nullable();
+            $table->string('image')->default('/avatar.png');
             $table->unsignedBigInteger('country_id')->nullable();
             $table->foreign('country_id')->references('id')->on('countries')->onDelete('cascade');
             $table->unsignedBigInteger('state_id')->nullable();

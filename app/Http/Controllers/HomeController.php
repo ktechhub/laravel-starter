@@ -28,6 +28,7 @@ class HomeController extends Controller
 
     public function dashboard()
     {
-        return view('back.general.index');
+        $url = "active";
+        return view('back.general.index', compact('url'));
     }
 }

@@ -10,3 +10,5 @@
 
 <!-- Template Main JS File -->
 <script src="/back/js/main.js"></script>
+@yield('scripts')
+@livewireScripts

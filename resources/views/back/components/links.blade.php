@@ -1,7 +1,7 @@
 <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-    <title>Dashboard - @yield('title')</title>
+    <title>Dropstar | @yield('title')</title>
     <meta content="Dropstar shipping" name="description">
     <meta content="Dropstar shipping" name="keywords">
 
@@ -26,3 +26,5 @@
 
     <!-- Template Main CSS File -->
     <link href="/back/css/style.css" rel="stylesheet">
+    @yield('styles')
+    @livewireStyles

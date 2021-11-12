@@ -24,3 +24,11 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::get('/dashboard', [App\Http\Controllers\HomeController::class, 'dashboard'])->name('dashboard');
 
 
+// SuperAdmin
+Route::namespace('App\Http\Controllers\Superadmin')->middleware(['auth:sanctum','verified','role:superadmin'])->prefix('superadmin')->name('superadmin.')->group(function(){
+    Route::resource('permissions', 'PermissionsController')->only(['index']);
+    Route::resource('roles', 'RolesController')->only(['index']);
+    Route::resource('users', 'UsersController')->only(['index']);
+    }
+);
+

@@ -148,7 +148,8 @@ class EditProfile extends Component
             return back();
         }
 
-        $user->image = "/avatar.png";
+        $user->image = "avatar.png";
+        $user->image_url = "/avatar.png";
         $user->save();
 
         $this->messageText = 'User profile picture updated successfully!';

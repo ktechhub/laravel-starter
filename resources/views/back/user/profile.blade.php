@@ -16,7 +16,7 @@
                 <div class="card">
                     <div class="card-body profile-card pt-4 d-flex flex-column align-items-center">
 
-                        <img src="{{ $user->image }}" alt="Profile" class="rounded-circle">
+                        <img src="{{ $user->image_url }}" alt="Profile" class="rounded-circle">
                         <h2>{{ $user->username }}</h2>
                         <h3>Joined: {{ $user->created_at->diffForHumans() }}</h3>
                         <div class="social-links mt-2">

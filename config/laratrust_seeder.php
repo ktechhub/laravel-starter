@@ -13,9 +13,9 @@ return [
 
     'roles_structure' => [
         'superadmin' => [
-            'users' => 'c,r,u,d',
-            'payments' => 'c,r,u,d',
-            'profile' => 'r,u'
+            'users' => 'c,r,u,d,p',
+            'payments' => 'c,r,u,d,p',
+            'profile' => 'c,r,u,d,p'
         ],
         'admin' => [
             'users' => 'c,r,u,d',

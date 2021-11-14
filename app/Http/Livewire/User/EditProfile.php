@@ -5,11 +5,17 @@ namespace App\Http\Livewire\User;
 use App\Models\Country;
 use App\Models\State;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\Rule;
 use Livewire\Component;
+use Intervention\Image\ImageManagerStatic as Image;
+use Livewire\WithFileUploads;
 
 class EditProfile extends Component
 {
+    use WithFileUploads;
+
     public $user;
 
     public $bio;
@@ -28,11 +34,13 @@ class EditProfile extends Component
     public $messageText = '';
     public $alert = '';
 
+    public $image;
+
     protected $rules = [
         'name' => 'required|string|max:100|min:4',
         'bio' => 'required|string|max:300|min:8',
         'gender' => 'required|string|max:100|min:4',
-        // 'image' => 'nullable|image|mimes:png,jpg,jpeg,gif|max:10000',
+        'image' => 'nullable|image|mimes:png,jpg,jpeg,gif|max:10000',
         'country' => 'required',
         'state' => 'required',
         'address' => 'required|string|max:200|min:5',
@@ -75,7 +83,8 @@ class EditProfile extends Component
 
     public function save()
     {
-        $user = User::find($this->user->id);
+        $this->validate();
+        $user = User::find(auth()->id());
         $user->name = $this->name;
         $user->bio = $this->bio;
         $user->gender = $this->gender;
@@ -98,5 +107,51 @@ class EditProfile extends Component
     {
         $this->messageText = '';
         $this->alert = '';
+    }
+
+    public function uploadImage()
+    {
+        $user = User::find(auth()->id());
+
+        $this->validate([
+            'image' => 'nullable|image|mimes:png,jpg,jpeg,gif|max:10000',
+        ]);
+
+        if ($this->image !== null) {
+            $file = $this->image;
+            $imageName = time().'.'.$file->getClientOriginalName();
+            $img = Image::make($file);
+            $img->resize(400, 400);
+
+            $resource = $img->stream()->detach();
+
+            $path = $this->image->storeAs('public/images/users', $imageName);
+
+            $user->image = $imageName;
+            $user->image_url = '/storage/images/users/'.$imageName;
+
+            $user->save();
+
+            $this->messageText = 'User profile picture updated successfully!';
+            $this->alert = 'success';
+            $this->image = '';
+        }
+    }
+
+    public function deleteImage()
+    {
+        $user = User::find(auth()->id());
+
+        if ($user->id != Auth::user()->id) {
+            $this->messageText = 'You cannot delete for '. $user->username . '!';
+            $this->alert = 'danger';
+            return back();
+        }
+
+        $user->image = "/avatar.png";
+        $user->save();
+
+        $this->messageText = 'User profile picture updated successfully!';
+        $this->alert = 'success';
     }
 }

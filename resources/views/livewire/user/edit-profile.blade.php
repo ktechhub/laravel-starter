@@ -8,21 +8,29 @@
         </div>
     @endif
 
-    <form wire:submit.prevent="save">
+    <form wire:submit.prevent="uploadImage">
         <div class="row mb-3">
             <label for="profileImage" class="col-md-4 col-lg-3 col-form-label">Profile
                 Image</label>
             <div class="col-md-8 col-lg-9">
-                <img src="{{ $user->image }}" alt="Profile">
+                @if ($image)
+                    <img src="{{ $image->temporaryUrl() }}" alt="Image Preview">
+                @else
+                    <img src="{{ $user->image_url }}" alt="Profile Image">
+                @endif
                 <div class="pt-2">
-                    <a href="#" class="btn btn-primary btn-sm" title="Upload new profile image"><i
-                            class="bi bi-upload"></i></a>
-                    <a href="#" class="btn btn-danger btn-sm" title="Remove my profile image"><i
-                            class="bi bi-trash"></i></a>
+                    <input type="file" wire:model="image" name="image" id="image" style="width: 150px" class="@error('image') is-invalid @enderror" id="name">
+                    <button type="submit" class="btn btn-primary btn-sm" title="Upload new profile image"><i class="bi bi-upload"></i></button>
+
+                    <button wire:click.prevent="deleteImage"
+                        onclick="confirm('Are you sure?') || event.stopImmediatePropagation()"
+                        class="btn btn-sm btn-danger btn-sm" title="Remove my profile image"><i class="bi bi-trash"></i></button>
                 </div>
             </div>
         </div>
+    </form>
 
+    <form wire:submit.prevent="save">
         <div class="row mb-3">
             <label for="fullName" class="col-md-4 col-lg-3 col-form-label">Full Name</label>
             <div class="col-md-8 col-lg-9">

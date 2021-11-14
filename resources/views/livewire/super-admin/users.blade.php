@@ -1,6 +1,7 @@
 <div>
     <a wire:click.prevent="create" href="" class="btn btn-primary">Add User</a><br><br>
-    <input wire:model="searchTerm" type="text" placeholder="Search User ..." class="form-control bg-white" style="width: 250px"><br>
+    <input wire:model="searchTerm" type="text" placeholder="Search User ..." class="form-control bg-white"
+        style="width: 250px"><br>
 
     <div class="row">
         @if ($messageText != '')
@@ -58,7 +59,7 @@
                                 <div class="form-group">
                                     <label for="password" class="col-form-label">
                                         @if ($previewUser)
-                                        Change
+                                            Change
                                         @endif Password
                                     </label>
                                     <input wire:model="password" type="password"

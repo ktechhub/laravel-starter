@@ -33,7 +33,14 @@ class CreateUsersTable extends Migration
             $table->unsignedBigInteger('state_id')->nullable();
             $table->foreign('state_id')->references('id')->on('states')->onDelete('cascade');
             $table->boolean('active')->default(True);
-            $table->boolean('paid')->default(false);
+
+            // Socials
+            $table->string('twitter')->nullable();
+            $table->string('facebook')->nullable();
+            $table->string('instagram')->nullable();
+            $table->string('linkedin')->nullable();
+            $table->string('github')->nullable();
+
             $table->rememberToken();
             $table->timestamps();
             $table->softDeletes();

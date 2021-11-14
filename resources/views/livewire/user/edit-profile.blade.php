@@ -153,12 +153,23 @@
             <label for="Linkedin" class="col-md-4 col-lg-3 col-form-label">Linkedin
                 Profile</label>
             <div class="col-md-8 col-lg-9">
-                <input wire:model="linkedin" name="linkedin" type="text" class="form-control @error('linkedin') is-invalid @enderror" id="linkedin" value="https://linkedin.com/#">
+                <input wire:model="linkedin" name="linkedin" type="text" class="form-control @error('linkedin') is-invalid @enderror" id="linkedin">
                 @error('linkedin')
                     <span class="invalid-feedback" role="alert">{{ $message }}</span>
                 @enderror
             </div>
         </div>
+
+        {{-- <div class="row mb-3">
+            <label for="github" class="col-md-4 col-lg-3 col-form-label">Github
+                Profile</label>
+            <div class="col-md-8 col-lg-9">
+                <input wire:model="github" name="github" type="text" class="form-control @error('github') is-invalid @enderror" id="github">
+                @error('github')
+                    <span class="invalid-feedback" role="alert">{{ $message }}</span>
+                @enderror
+            </div>
+        </div> --}}
 
         <div class="text-center">
             <button type="submit" class="btn btn-primary">Save Changes</button>

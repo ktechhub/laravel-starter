@@ -32,3 +32,10 @@ Route::namespace('App\Http\Controllers\Superadmin')->middleware(['auth','verifie
     }
 );
 
+
+
+// Users
+Route::namespace('App\Http\Controllers\User')->middleware(['auth','verified'])->prefix('user')->name('user.')->group(function(){
+    Route::resource('profile', 'AccountController')->only(['show']);
+    }
+);

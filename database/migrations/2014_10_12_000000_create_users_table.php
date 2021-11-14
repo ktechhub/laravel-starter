@@ -24,6 +24,8 @@ class CreateUsersTable extends Migration
             $table->string('facebook_id')->nullable();
             $table->string('phone')->nullable();
             $table->string('gender')->nullable();
+            $table->string('address')->nullable();
+            $table->mediumText('bio')->nullable();
             $table->string('dob')->nullable();
             $table->string('image')->default('/avatar.png');
             $table->unsignedBigInteger('country_id')->nullable();
